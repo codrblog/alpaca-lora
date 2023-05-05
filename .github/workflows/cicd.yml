@@ -1,0 +1,12 @@
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    uses: cloud-cli/workflows/.github/workflows/docker-ghcr-build.yml@main
+    with:
+      name: codrblog/lora
+      defaultBranch: main
+      baseImage: nvidia/cuda:11.8.0-devel-ubuntu22.04
