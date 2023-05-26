@@ -1,9 +1,11 @@
 FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt install software-properties-common && add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get install -y git gcc curl python3.10 python3-dev &&\
-    rm -rf /var/lib/apt/lists/*
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get install -y git gcc curl python3.10 python3-dev && rm -rf /var/lib/apt/lists/*
+RUN apt-get remove software-properties-common && apt-get -y autoremove
 
 WORKDIR /workspace
 COPY . .
